@@ -4,9 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="GRID_BACKGROUND_COLOR">#268b78</color>
-    <color name="SELECTED">#68c94b</color>
-    <color name="UNSELECTED">#e9e9e9</color>
+    <color name="SELECTED">#16c484</color>
+    <color name="UNSELECTED">#cfcfcf</color>
     <color name="NON_EMPTY_CELL_COLOR">#b7b7b7</color>
     <color name="EMPTY_CELL_COLOR">#cfcfcf</color>
-    <color name="BOX_BACKGROUND_COLOR">#098f89</color>
+    <color name="HIGHLIGHT_EMPTY_CELL">#2bffc5</color>
+    <color name="HIGHLIGHT_LOCKED_CELL">#09995d</color>
+    <color name="BOX_BACKGROUND_COLOR">#034e4b</color>
 </resources>

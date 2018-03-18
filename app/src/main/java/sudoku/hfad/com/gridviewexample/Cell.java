@@ -33,10 +33,11 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
 
     private boolean isLocked;
     private int mValues;
+    private int ID;
 
-
-    public Cell(Context context, int value) {
+    public Cell(Context context, int ID, int value) {
         super(context);
+        this.ID = ID;
         setHeight(CELL_HEIGHT);
         setGravity(Gravity.CENTER);
         setValue(value);
@@ -46,10 +47,6 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
 
     public boolean isLocked() {
         return isLocked;
-    }
-
-    public void setGameActivitySelectedCell() {
-        GameActivity.setSelectedCell(this);
     }
 
     public void setValue(int value) {
@@ -74,8 +71,17 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
             setText("");
         }
     }
-
+    public int getIndex () {
+        return ID;
+    }
     public int getValues() {
         return mValues;
+    }
+
+    public void setHighLight() {
+        setBackgroundResource(isLocked ? R.color.HIGHLIGHT_LOCKED_CELL : R.color.HIGHLIGHT_EMPTY_CELL);
+    }
+    public void setNoHighLight() {
+        setBackgroundResource(isLocked ? R.color.NON_EMPTY_CELL_COLOR : R.color.EMPTY_CELL_COLOR);
     }
 }

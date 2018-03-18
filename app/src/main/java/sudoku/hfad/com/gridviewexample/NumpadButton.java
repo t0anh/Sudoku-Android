@@ -3,7 +3,6 @@ package sudoku.hfad.com.gridviewexample;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -12,26 +11,22 @@ import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")
 public class NumpadButton extends TextView {
-    static final String[] buttonText = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "X"};
+    static final String[] buttonText = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "CLEAR"};
     public boolean isMarked = false;
-    private final int ID;
+    private int value;
 
     @SuppressLint("ResourceAsColor")
-    public NumpadButton(Context context, final int position) {
+    public NumpadButton(Context context, int position) {
         super(context);
         setHeight(Cell.CELL_HEIGHT);
         setBackgroundResource(R.color.UNSELECTED);
         setText(buttonText[position]);
         setGravity(Gravity.CENTER);
-        setTextSize(20);
-        this.ID = position + 1;
+        setTextSize((position == 9) ? 12 : 20);
+        value = position + 1;
+    }
 
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameActivity.setValueToSelectedCell(ID % 10);
-                GameActivity.updateNumpad();
-            }
-        });
+    public int getIndex() {
+        return value % 10;
     }
 }

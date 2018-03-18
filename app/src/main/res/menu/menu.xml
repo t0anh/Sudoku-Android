@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_reset"
+        android:title="Reset"
+        android:icon="@drawable/ic_reset"
+        yourapp:showAsAction="always" />
+    <item
+        android:id="@+id/action_solution"
+        android:title="Xem đáp án"
+        android:icon="@drawable/ic_hint"
+        yourapp:showAsAction="always" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="Cài đặt"
+        yourapp:showAsAction="never" />
+    <item
+        android:id="@+id/action_ladderboard"
+        android:title="Bảng thành tích"
+        yourapp:showAsAction="never" />
+</menu>

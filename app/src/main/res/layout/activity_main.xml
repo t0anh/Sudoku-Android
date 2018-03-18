@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,32 +15,37 @@
             android:layout_width="match_parent"
             android:layout_height="120px"
             android:orientation="horizontal"
-            android:layout_margin="10px"
-            android:gravity="center"
+            android:layout_margin="20px"
+            android:layout_marginBottom="50px"
             >
             <ImageView
                 android:id="@+id/timer_icon"
-                android:layout_width="120px"
-                android:layout_height="120px"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:layout_toLeftOf="@id/timer"
+                android:layout_centerVertical="true"
                 android:src="@drawable/timer" />
             <TextView
                 android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_alignLeft="@id/timer"
-                android:text="Time"
-                android:layout_toRightOf="@+id/timer_icon"
+                android:text="00:00"
+                android:textColor="#464b47"
+                android:textSize="70px"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10px"
                 />
             <TextView
                 android:id="@+id/difficult_text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Độ khó: Bình thường"
+                android:text="VERY EASY"
                 android:gravity="center"
-                android:layout_centerHorizontal="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="20px"
                 />
             <Button
                 android:id="@+id/submit_button"
@@ -52,6 +56,7 @@
                 android:gravity="center"
                 android:onClick="OnClickSubmit"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 />
         </RelativeLayout>
         <GridView
@@ -59,11 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="3"
-            android:verticalSpacing="8px"
-            android:horizontalSpacing="8px"
-            android:background="@color/GRID_BACKGROUND_COLOR"
+            android:verticalSpacing="7px"
+            android:horizontalSpacing="7px"
+            android:background="@color/BOX_BACKGROUND_COLOR"
             android:layout_margin="20px"
-            android:padding="10px"
+            android:padding="9px"
             android:layout_below="@+id/info_panel"
             >
         </GridView>
@@ -72,11 +77,11 @@
             android:id="@+id/numpad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/GRID_BACKGROUND_COLOR"
+            android:background="@color/BOX_BACKGROUND_COLOR"
             android:gravity="center"
             android:horizontalSpacing="3px"
             android:numColumns="5"
-            android:padding="10px"
+            android:padding="9px"
             android:verticalSpacing="3px"
             android:layout_marginTop="20px"
             android:layout_marginLeft="150px"
@@ -84,6 +89,7 @@
             android:layout_below="@id/main_grid"
             android:visibility="invisible">
         </GridView>
-    </RelativeLayout>
 
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
