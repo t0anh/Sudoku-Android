@@ -17,3 +17,9 @@ Game sudoku trên android
 - Preview:
 
 ![alt text](https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/game_activity.png)
+![alt text](https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/menu.png)
+
+# Cập nhật 3
+- Tối ưu hiệu năng
+- Cập nhật tính năng xem đáp án
+- Cập nhật menu
