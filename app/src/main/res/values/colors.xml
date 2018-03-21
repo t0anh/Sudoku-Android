@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#268b78</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="GRID_BACKGROUND_COLOR">#268b78</color>
     <color name="SELECTED">#16c484</color>
     <color name="UNSELECTED">#cfcfcf</color>
-    <color name="NON_EMPTY_CELL_COLOR">#b7b7b7</color>
+    <color name="LOCKED_CELL_COLOR">#b7b7b7</color>
     <color name="EMPTY_CELL_COLOR">#cfcfcf</color>
-    <color name="HIGHLIGHT_EMPTY_CELL">#2bffc5</color>
-    <color name="HIGHLIGHT_LOCKED_CELL">#09995d</color>
+    <color name="HIGHLIGHT_EMPTY_CELL_COLOR">#2bffc5</color>
+    <color name="HIGHLIGHT_LOCKED_CELL_COLOR">#09995d</color>
     <color name="BOX_BACKGROUND_COLOR">#034e4b</color>
+    <color name="MAIN_MENU_BACKGROUNG_COLOR">#e063e6b6</color>
+    <color name="MAIN_BUTTON_COLOR">#2dab74</color>
 </resources>

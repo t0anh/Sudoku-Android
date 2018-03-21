@@ -1,95 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sudoku.hfad.com.gridviewexample.GameActivity">
+    tools:context="android.hfad.com.sudoku.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#449a9c9a"
-        >
-        <RelativeLayout
-            android:id="@+id/info_panel"
-            android:layout_width="match_parent"
-            android:layout_height="120px"
-            android:orientation="horizontal"
-            android:layout_margin="20px"
-            android:layout_marginBottom="50px"
-            >
-            <ImageView
-                android:id="@+id/timer_icon"
-                android:layout_width="100px"
-                android:layout_height="100px"
-                android:layout_toLeftOf="@id/timer"
-                android:layout_centerVertical="true"
-                android:src="@drawable/timer" />
-            <TextView
-                android:id="@+id/timer"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="00:00"
-                android:textColor="#464b47"
-                android:textSize="70px"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="10px"
-                />
-            <TextView
-                android:id="@+id/difficult_text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="VERY EASY"
-                android:gravity="center"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="20px"
-                />
-            <Button
-                android:id="@+id/submit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:textSize="10dp"
-                android:gravity="center"
-                android:onClick="OnClickSubmit"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
-        <GridView
-            android:id="@+id/main_grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="3"
-            android:verticalSpacing="7px"
-            android:horizontalSpacing="7px"
-            android:background="@color/BOX_BACKGROUND_COLOR"
-            android:layout_margin="20px"
-            android:padding="9px"
-            android:layout_below="@+id/info_panel"
-            >
-        </GridView>
+        android:background="@color/MAIN_MENU_BACKGROUNG_COLOR"
+        android:gravity="center">
 
-        <GridView
-            android:id="@+id/numpad"
+        <Button
+            android:id="@+id/btn_easy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/BOX_BACKGROUND_COLOR"
-            android:gravity="center"
-            android:horizontalSpacing="3px"
-            android:numColumns="5"
-            android:padding="9px"
-            android:verticalSpacing="3px"
-            android:layout_marginTop="20px"
-            android:layout_marginLeft="150px"
-            android:layout_marginRight="150px"
-            android:layout_below="@id/main_grid"
-            android:visibility="invisible">
-        </GridView>
+            android:background="@color/MAIN_BUTTON_COLOR"
+            android:textColor="#484747"
+            android:layout_marginBottom="40px"
+            android:textSize="16dp"
+            android:text="EASY"
+            android:onClick="onClickButton"/>
 
+        <Button
+            android:id="@+id/btn_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_easy"
+            android:background="@color/MAIN_BUTTON_COLOR"
+            android:layout_marginBottom="40px"
+            android:textColor="#484747"
+            android:textSize="16dp"
+            android:text="NORMAL"
+            android:onClick="onClickButton"/>
 
+        <Button
+            android:id="@+id/btn_hard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_normal"
+            android:background="@color/MAIN_BUTTON_COLOR"
+            android:layout_marginBottom="40px"
+            android:textColor="#484747"
+            android:textSize="16dp"
+            android:text="HARD"
+            android:onClick="onClickButton"/>
+
+        <Button
+            android:id="@+id/btn_nightmare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_hard"
+            android:background="@color/MAIN_BUTTON_COLOR"
+            android:textColor="#484747"
+            android:textSize="16dp"
+            android:text="NIGHTMARE"
+            android:onClick="onClickButton"/>
     </RelativeLayout>
+
+
 </android.support.constraint.ConstraintLayout>

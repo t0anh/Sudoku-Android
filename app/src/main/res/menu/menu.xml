@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_reset"
         yourapp:showAsAction="always" />
     <item
-        android:id="@+id/action_solution"
+        android:id="@+id/action_solve"
         android:title="Xem đáp án"
         android:icon="@drawable/ic_hint"
         yourapp:showAsAction="always" />
