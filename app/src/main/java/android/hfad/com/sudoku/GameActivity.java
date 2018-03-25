@@ -5,12 +5,16 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,9 +31,13 @@ public class GameActivity extends AppCompatActivity {
     private int[][] gridValues;
     private int timeElapsed;
     private SudokuSolver solver = new SudokuSolver();
-    private final int[] numberOfEmptyCells = {0, 20, 30, 40, 50};
+    private final int[] numberOfEmptyCells = {0, 20, 30, 40, 45};
     private final String[] difficultName = {"NONE", "EASY", "NORMAL", "HARD", "NIGHTMARE"};
-    static int counter;
+    private TextView timer;
+    private Handler handler;
+    private Runnable runnable;
+    private int gameState;
+
 
     @SuppressLint("ResourceType")
     @Override
@@ -44,11 +52,13 @@ public class GameActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // action with ID action_settings was selected
             case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_solve:
                 onClickSolve();
+                break;
+            case R.id.action_reset:
+                onClickReset();
                 break;
             default:
                 break;
@@ -57,6 +67,9 @@ public class GameActivity extends AppCompatActivity {
         return true;
     }
 
+
+
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +88,19 @@ public class GameActivity extends AppCompatActivity {
 
         /* difficult text */
         TextView view = findViewById(R.id.difficult_text);
-        view.setText(difficultName[AppConstant.difficulty]);
+        SpannableString diffText = new SpannableString(difficultName[AppConstant.difficulty]);
+        diffText.setSpan(new RelativeSizeSpan(2f), 0, diffText.length(), 0);
+        diffText.setSpan(new ForegroundColorSpan(Color.parseColor("#0a6454")), 0, diffText.length(), 0);
+        view.setText(diffText);
+        view.setTextSize(7);
 
+        /* setup submit button */
+        SpannableString submitStr = new SpannableString("Submit");
+        submitStr.setSpan(new RelativeSizeSpan(2f), 0, 6, 0);
+        submitStr.setSpan(new ForegroundColorSpan(Color.DKGRAY), 0, 6, 0);
+        Button submitButton = findViewById(R.id.submit_button);
+        submitButton.setText(submitStr);
+        submitButton.setTextSize(7);
          /* generate a sudoku */
         gridValues = solver.getRandomGrid(numberOfEmptyCells[AppConstant.difficulty]);
         for (int row = 0; row < 9; ++row) {
@@ -103,9 +127,9 @@ public class GameActivity extends AppCompatActivity {
                         numpad.setVisibility(View.VISIBLE);
                         for (int x = 1; x <= 9; ++x) {
                             if ((values >> x) % 2 == 1) {
-                                numpad.getChildAt(x - 1).setBackgroundResource(R.color.SELECTED);
+                                numpad.getChildAt(x - 1).setBackgroundResource(R.color.NUMPAD_BUTTON_MARKED_COLOR);
                             } else {
-                                numpad.getChildAt(x - 1).setBackgroundResource(R.color.UNSELECTED);
+                                numpad.getChildAt(x - 1).setBackgroundResource(R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
                             }
                         }
                     }
@@ -139,12 +163,11 @@ public class GameActivity extends AppCompatActivity {
 
     private void setupTimer() {
         timeElapsed = 0;
-
-        final TextView timer = findViewById(R.id.timer);
+        timer = findViewById(R.id.timer);
         timer.setTextColor(Color.BLACK);
 
-        final Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
             @Override
             public void run() {
                 timeElapsed += 1;
@@ -184,6 +207,9 @@ public class GameActivity extends AppCompatActivity {
     static public void setSelectedCell(Cell cell) {
         selectedCell = cell;
         highlightNeighborCells(cell.getPosition());
+        if(!cell.isLocked()) {
+            cell.setBackgroundResource(R.color.TARGET_CELL_COLOR);
+        }
     }
 
     public static void updateNumpad() {
@@ -192,21 +218,28 @@ public class GameActivity extends AppCompatActivity {
             for (int x = 1; x <= 9; ++x) {
                 NumpadButton button = (NumpadButton) numpad.getChildAt(x - 1);
                 button.isMarked = ((values >> x) % 2 == 1);
-                button.setBackgroundResource(button.isMarked ? R.color.SELECTED : R.color.UNSELECTED);
+                button.setBackgroundResource(button.isMarked ? R.color.NUMPAD_BUTTON_MARKED_COLOR : R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
             }
         }
     }
 
     public void onClickSubmit(View view) {
-        if (!isUniqueValueGrid()) return;
+        if (!isUniqueValueGrid()) {
+            return;
+        }
         int[][] grid = new int[9][9];
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
-                grid[row][col] = cells[row][col].getValue();
+                grid[row][col] = cells[row][col].getNumber();
             }
         }
         if (solver.checkAcceptedGrid(grid)) {
             Toast.makeText(this, "Accepted", LENGTH_LONG).show();
+            handler.removeCallbacks(runnable);
+            gameState = 1;
+        }
+        else {
+            Toast.makeText(this, "Wrong answer", LENGTH_LONG).show();
         }
     }
 
@@ -217,11 +250,27 @@ public class GameActivity extends AppCompatActivity {
                 gridValues[row][col] &= ~1024;
 
                 cells[row][col].setNumber(gridValues[row][col]);
-                cells[row][col].setLocked();
+                if(!cells[row][col].isLocked()) {
+                    cells[row][col].setTextColor(Color.RED);
+                    cells[row][col].setTextSize(Cell.CELL_DEFAULT_TEXT_SIZE);
+                }
+                numpad.setEnabled(false);
+            }
+        }
+        handler.removeCallbacks(runnable);
+        gameState = -1;
+    }
+
+    private void onClickReset() {
+        if(gameState != 0) return;
+        for(Cell[] row : cells) {
+            for(Cell cell : row) {
+                if(!cell.isLocked()) {
+                    cell.addNumber(0);
+                }
             }
         }
     }
-
 
     public boolean isUniqueValueGrid() {
         for (int row = 0; row < 9; ++row) {

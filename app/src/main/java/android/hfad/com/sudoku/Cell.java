@@ -2,6 +2,7 @@ package android.hfad.com.sudoku;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     static public int CELL_DEFAULT_TEXT_SIZE = 18;
     static public int CELL_HEIGHT;
     static private final int[] indexOfNumber = {0, 0, 3, 6, 8, 11, 14, 16, 19, 22}; // in format cell string
-    static public final Map<Integer, Integer> maskToValue = new HashMap<Integer, Integer>() {
+    static public final Map<Integer, Integer> maskToNumber = new HashMap<Integer, Integer>() {
         {
             put(0, 0);
             put(1, 0);
@@ -34,23 +35,29 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     private boolean isLocked;
     private int mask;
     private final int position;
+    private final int box;
 
     public Cell(Context context, int position, int number) {
         super(context);
         this.position = position;
         this.mask = 0;
-        if(number <= 9) {
-            isLocked = true;
-            addNumber(number);
-        }
-        else {
-            isLocked = false;
-            addNumber(0);
-        }
-
-        setBackgroundResource(isLocked ? R.color.LOCKED_CELL_COLOR : R.color.EMPTY_CELL_COLOR);
         setHeight(CELL_HEIGHT);
         setGravity(Gravity.CENTER);
+        int row = position / 9;
+        int col = position - row * 9;
+        box = (row / 3) * 3 + col / 3;
+
+        if (number <= 9) {
+            isLocked = true;
+            addNumber(number);
+            setTextColor(Color.parseColor("#353535"));
+        } else {
+            isLocked = false;
+            addNumber(0);
+            setTextColor(Color.parseColor("#2d4fe4"));
+        }
+
+        setNoHighLight();
     }
 
     public boolean isLocked() {
@@ -72,30 +79,36 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
                 setText(String.valueOf(format));
             } else {
                 setTextSize(CELL_DEFAULT_TEXT_SIZE);
-                setText(String.valueOf(maskToValue.get(mask)));
+                setText(String.valueOf(maskToNumber.get(mask)));
             }
         } else {
             mask = 0;
             setText("");
         }
     }
+
     public int getPosition() {
         return position;
     }
+
     public int getMask() {
         return mask;
     }
-    public int getValue () {return maskToValue.get(mask); }
-    public void setLocked () {
-        setTextSize(CELL_DEFAULT_TEXT_SIZE);
-        setClickable(false);
-        setBackgroundResource(R.color.LOCKED_CELL_COLOR);
+
+    public int getNumber() {
+        return maskToNumber.get(mask);
     }
+
     public void setHighLight() {
         setBackgroundResource(isLocked ? R.color.HIGHLIGHT_LOCKED_CELL_COLOR : R.color.HIGHLIGHT_EMPTY_CELL_COLOR);
     }
+
     public void setNoHighLight() {
-        setBackgroundResource(isLocked ? R.color.LOCKED_CELL_COLOR : R.color.EMPTY_CELL_COLOR);
+        if (box % 2 == 0) {
+            setBackgroundResource(R.color.EVEN_BOX_COLOR);
+        } else {
+            setBackgroundResource(R.color.ODD_BOX_COLOR);
+        }
     }
 
     public void setNumber(int number) {

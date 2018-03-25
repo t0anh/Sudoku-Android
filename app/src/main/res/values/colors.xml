@@ -4,13 +4,18 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="GRID_BACKGROUND_COLOR">#268b78</color>
-    <color name="SELECTED">#16c484</color>
-    <color name="UNSELECTED">#cfcfcf</color>
-    <color name="LOCKED_CELL_COLOR">#b7b7b7</color>
-    <color name="EMPTY_CELL_COLOR">#cfcfcf</color>
-    <color name="HIGHLIGHT_EMPTY_CELL_COLOR">#2bffc5</color>
+    <color name="LOCKED_CELL_COLOR">#76af79</color>
+    <color name="EVEN_BOX_COLOR">#bbefca</color>
+    <color name="ODD_BOX_COLOR">#9bc6a7</color>
+    <color name="HIGHLIGHT_EMPTY_CELL_COLOR">#9cfcdf</color>
     <color name="HIGHLIGHT_LOCKED_CELL_COLOR">#09995d</color>
     <color name="BOX_BACKGROUND_COLOR">#034e4b</color>
-    <color name="MAIN_MENU_BACKGROUNG_COLOR">#e063e6b6</color>
+    <color name="MAIN_MENU_BACKGROUNG_COLOR">#88f1b7</color>
     <color name="MAIN_BUTTON_COLOR">#2dab74</color>
+    <color name="GAME_BACKGROUND_COLOR">#b8e9c5</color>
+    <color name="NUMPAD_BUTTON_MARKED_COLOR">#3bff90</color>
+    <color name="NUMPAD_BUTTON_UNMARKED_COLOR">#bbefca</color>
+    <color name="TARGET_CELL_COLOR">#3bff90</color>
+    <color name="SUBMIT_BUTTON_COLOR">#11a98d</color>
+    <color name="DIFFICULT_TEXT_COLOR">#0a6454</color>
 </resources>
