@@ -23,3 +23,7 @@ Game sudoku trên android
 - Tối ưu hiệu năng
 - Cập nhật tính năng xem đáp án
 - Cập nhật menu
+# Cập nhật 4
+- Cập nhật giao diện
+- Cập nhật chức năng Reset, Solve
+- Cập nhật API (`Sudoku Solver`)
