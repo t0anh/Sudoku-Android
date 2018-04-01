@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/MAIN_MENU_BACKGROUNG_COLOR"
+        android:background="@color/GAME_BACKGROUND_COLOR"
         android:gravity="center">
 
         <Button
@@ -17,9 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/MAIN_BUTTON_COLOR"
-            android:textColor="#484747"
+            android:textColor="@color/MY_DARK"
             android:layout_marginBottom="40px"
-            android:textSize="16dp"
+            android:textSize="20dp"
             android:text="EASY"
             android:onClick="onClickButton"/>
 
@@ -30,8 +30,8 @@
             android:layout_below="@id/btn_easy"
             android:background="@color/MAIN_BUTTON_COLOR"
             android:layout_marginBottom="40px"
-            android:textColor="#484747"
-            android:textSize="16dp"
+            android:textColor="@color/MY_DARK"
+            android:textSize="20dp"
             android:text="NORMAL"
             android:onClick="onClickButton"/>
 
@@ -42,20 +42,20 @@
             android:layout_below="@id/btn_normal"
             android:background="@color/MAIN_BUTTON_COLOR"
             android:layout_marginBottom="40px"
-            android:textColor="#484747"
-            android:textSize="16dp"
+            android:textColor="@color/MY_DARK"
+            android:textSize="20dp"
             android:text="HARD"
             android:onClick="onClickButton"/>
 
         <Button
-            android:id="@+id/btn_nightmare"
+            android:id="@+id/btn_extreme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_hard"
             android:background="@color/MAIN_BUTTON_COLOR"
-            android:textColor="#484747"
-            android:textSize="16dp"
-            android:text="NIGHTMARE"
+            android:textColor="@color/MY_DARK"
+            android:textSize="20dp"
+            android:text="EXTREME"
             android:onClick="onClickButton"/>
     </RelativeLayout>
 

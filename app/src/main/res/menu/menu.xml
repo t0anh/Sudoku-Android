@@ -9,14 +9,21 @@
     <item
         android:id="@+id/action_solve"
         android:title="Xem đáp án"
-        android:icon="@drawable/ic_hint"
-        yourapp:showAsAction="always" />
-    <item
-        android:id="@+id/action_settings"
-        android:title="Cài đặt"
         yourapp:showAsAction="never" />
+    <item
+        android:id="@+id/action_autofill"
+        android:icon="@drawable/ic_hint"
+        android:title="Gợi ý"
+        yourapp:showAsAction="always" />
     <item
         android:id="@+id/action_ladderboard"
         android:title="Bảng thành tích"
         yourapp:showAsAction="never" />
+    <item
+        android:id="@+id/action_tutorial"
+        android:title="Hướng dẫn"
+        yourapp:showAsAction="always"
+        android:icon="@drawable/ic_tutorial_1"
+        />
+
 </menu>

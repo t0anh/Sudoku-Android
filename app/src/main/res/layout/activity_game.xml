@@ -13,59 +13,44 @@
         <RelativeLayout
             android:id="@+id/info_panel"
             android:layout_width="match_parent"
-            android:layout_height="120px"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="20px"
-            android:layout_marginBottom="50px"
             >
+
             <ImageView
                 android:id="@+id/timer_icon"
-                android:layout_width="100px"
-                android:layout_height="100px"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_toLeftOf="@id/time"
+                android:src="@drawable/timer"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/timer"
-                android:src="@drawable/timer" />
+                />
+
             <TextView
-                android:id="@+id/timer"
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
-                android:textColor="#464b47"
-                android:textSize="70px"
+                android:textColor="#000000"
+                android:textSize="30dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
+                android:layout_margin="10px"
                 />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/timer_icon"
-                android:gravity="center"
-                android:layout_margin="10px">
-
-                <TextView
-                    android:id="@+id/difficult_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/DIFFICULT_TEXT_COLOR"
-                    android:text="Text"
-                    android:gravity="center"
-                    android:background="@drawable/my_border"
-                    android:paddingLeft="12px"
-                    android:paddingRight="12px"
-                    />
-            </RelativeLayout>
             <Button
                 android:id="@+id/submit_button"
-                android:layout_width="200px"
-                android:layout_height="match_parent"
-                android:textColor="#3b3a3a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textSize="20dp"
                 android:onClick="onClickSubmit"
                 android:backgroundTint="@color/SUBMIT_BUTTON_COLOR"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
                 android:textAllCaps="false"
-                android:layout_margin="10px"
-                android:padding="20px"
                 />
         </RelativeLayout>
         <GridView
@@ -73,11 +58,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="3"
-            android:verticalSpacing="7px"
-            android:horizontalSpacing="7px"
-            android:background="@color/BOX_BACKGROUND_COLOR"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:background="@color/GRID_BACKGROUND_COLOR"
             android:layout_margin="20px"
-            android:padding="9px"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="2dp"
             android:layout_below="@+id/info_panel"
             >
         </GridView>
@@ -86,18 +74,14 @@
             android:id="@+id/numpad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/BOX_BACKGROUND_COLOR"
+            android:background="@color/GRID_BACKGROUND_COLOR"
             android:gravity="center"
-            android:horizontalSpacing="7px"
-            android:verticalSpacing="7px"
-            android:paddingLeft="8px"
-            android:paddingTop="8px"
-            android:paddingBottom="8px"
-            android:paddingRight="6px"
-            android:numColumns="5"
-            android:layout_marginTop="20px"
-            android:layout_marginLeft="150px"
-            android:layout_marginRight="150px"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="2dp"
+            android:padding="3dp"
+            android:numColumns="6"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_below="@id/main_grid"
             android:visibility="invisible">
         </GridView>
