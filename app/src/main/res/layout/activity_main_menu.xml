@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="android.hfad.com.sudoku.MainMenuActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#8d25c217"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/sudoku_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="50dp"
+            android:layout_above="@id/btnPlay"
+            android:text="Sudoku"
+            android:textSize="50dp" />
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="onClickPlay"
+            android:text="Play"
+            android:textSize="30dp"
+            android:background="#549f26"
+            android:layout_margin="10dp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnLadderBoard"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnPlay"
+            android:layout_centerHorizontal="true"
+            android:onClick="onClickLadderboard"
+            android:text="Ladderboard"
+            android:textSize="25dp"
+            android:background="#549f26"
+            android:layout_margin="10dp"
+            android:textAllCaps="false"/>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
+

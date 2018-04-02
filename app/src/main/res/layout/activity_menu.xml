@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="android.hfad.com.sudoku.MainActivity">
+    tools:context="android.hfad.com.sudoku.SelectDifficultyActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/MAIN_BUTTON_COLOR"
-            android:textColor="@color/MY_DARK"
             android:layout_marginBottom="40px"
             android:textSize="20dp"
             android:text="EASY"
@@ -30,7 +29,6 @@
             android:layout_below="@id/btn_easy"
             android:background="@color/MAIN_BUTTON_COLOR"
             android:layout_marginBottom="40px"
-            android:textColor="@color/MY_DARK"
             android:textSize="20dp"
             android:text="NORMAL"
             android:onClick="onClickButton"/>
@@ -42,7 +40,6 @@
             android:layout_below="@id/btn_normal"
             android:background="@color/MAIN_BUTTON_COLOR"
             android:layout_marginBottom="40px"
-            android:textColor="@color/MY_DARK"
             android:textSize="20dp"
             android:text="HARD"
             android:onClick="onClickButton"/>
@@ -53,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_hard"
             android:background="@color/MAIN_BUTTON_COLOR"
-            android:textColor="@color/MY_DARK"
             android:textSize="20dp"
             android:text="EXTREME"
             android:onClick="onClickButton"/>

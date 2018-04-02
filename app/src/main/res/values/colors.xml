@@ -9,7 +9,7 @@
     <color name="HIGHLIGHT_EMPTY_CELL_COLOR">#5cfc91</color>
     <color name="HIGHLIGHT_LOCKED_CELL_COLOR">#09995d</color>
     <color name="GRID_BACKGROUND_COLOR">#034e4b</color>
-    <color name="MAIN_BUTTON_COLOR">#299b69</color>
+    <color name="MAIN_BUTTON_COLOR">#209376</color>
     <color name="GAME_BACKGROUND_COLOR">#71c798</color>
     <color name="NUMPAD_BUTTON_MARKED_COLOR">#3bff90</color>
     <color name="NUMPAD_BUTTON_UNMARKED_COLOR">#bbefca</color>

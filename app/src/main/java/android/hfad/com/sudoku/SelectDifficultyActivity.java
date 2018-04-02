@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class SelectDifficultyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 AppConstant.difficulty = 0;
             }
         }
-        Intent intent = new Intent(MainActivity.this, GameActivity.class);
-        MainActivity.this.startActivity(intent);
+        Intent intent = new Intent(SelectDifficultyActivity.this, GameActivity.class);
+        SelectDifficultyActivity.this.startActivity(intent);
     }
 }
