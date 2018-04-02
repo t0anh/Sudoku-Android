@@ -2,6 +2,9 @@ package android.hfad.com.sudoku;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +23,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +54,6 @@ public class GameActivity extends AppCompatActivity {
     private Runnable runnable;
     private int gameState;
     Stack<CellState> cookie = new Stack<>();
-
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -58,7 +63,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        this.doubleBackToExitPressedOnce = true;
+        doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Bấm 'BACK' lần nữa để quay lại menu chính", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -118,16 +123,11 @@ public class GameActivity extends AppCompatActivity {
                             dialogInterface.cancel();
                         }
                     })
-                    .setIcon(R.drawable.ic_tutorial)
                     .show();
         }
     }
 
     private void onClickTutorial() {
-        /*
-        * source: https://stackoverflow.com/questions/25521685/how-to-insert-drawables-in-text
-        * Note: A custom SpanableString with image
-        * */
         AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.MyTutorialTheme);
         Spannable message = SpannableWithImage.getTextWithImages(this, getString(R.string.tutorial), 50);
 

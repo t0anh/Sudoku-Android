@@ -16,10 +16,6 @@
         android:title="Gợi ý"
         yourapp:showAsAction="always" />
     <item
-        android:id="@+id/action_ladderboard"
-        android:title="Bảng thành tích"
-        yourapp:showAsAction="never" />
-    <item
         android:id="@+id/action_tutorial"
         android:title="Hướng dẫn"
         yourapp:showAsAction="always"

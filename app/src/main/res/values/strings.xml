@@ -6,4 +6,25 @@
         - Click vào biểu tượng [img src=ic_reset/] để xóa toàn bộ số đã điền.\n
         - Click vào biểu tượng [img src=ic_hint/] để xem gợi ý.\n
     </string>
+    <string name="CREATE_PLAYER_TABLE">CREATE TABLE player (
+        _name    TEXT PRIMARY KEY
+        )
+    </string>
+
+    <string name="CREATE_DIFFICULTY_TABLE">CREATE TABLE difficulty (
+        _id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name    TEXT,
+        numberOfEmptyCells    INTEGER
+        )
+    </string>
+
+    <string name="CREATE_ACHIEVEMENT_TABLE">CREATE TABLE achievement (
+        _id INTEGER PRIMARY KEY AUTOINCREMENT,
+        time    INTEGER,
+        note    TEXT,
+        date    DATE,
+        difficulty_id INTEGER REFERENCES difficulty(_id),
+        player_name    TEXT REFERENCES player(_name)
+        )
+    </string>
 </resources>
