@@ -13,15 +13,14 @@
         tools:layout_editor_absoluteY="0dp"
         tools:ignore="MissingConstraints">
 
-        <TextView
+        <ImageImageView
             android:id="@+id/sudoku_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_margin="50dp"
             android:layout_above="@id/btnPlay"
-            android:text="Sudoku"
-            android:textSize="50dp" />
+            />
 
         <Button
             android:id="@+id/btnPlay"
