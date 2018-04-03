@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="android.hfad.com.sudoku.SelectDifficultyActivity">
+    tools:context="android.hfad.com.sudoku.LadderboardActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <TextView
             android:id="@+id/txtEasy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EASY"/>
+            android:text="EASY"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
         <TextView
             android:id="@+id/txtNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NORMAL"
-            android:layout_toRightOf="@id/txtEasy"/>
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_toRightOf="@id/txtEasy"
+            />
 
         <TextView
             android:id="@+id/txtHard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="HARD"
-            android:layout_toRightOf="@id/txtNormal"/>
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_toRightOf="@id/txtNormal"
+            />
         <TextView
             android:id="@+id/txtExtreme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EXTREME"
-            android:layout_toRightOf="@id/txtHard"/>
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_toRightOf="@id/txtHard"
+            />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -13,7 +12,7 @@ public class MainMenuActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main);
 
         /* hide the status bar */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -29,8 +28,8 @@ public class MainMenuActivity extends Activity {
     }
 
     public void onClickLadderboard(View view) {
-//        Intent intent = new Intent(this, GameActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, LadderboardActivity.class);
+        startActivity(intent);
     }
 
     public void onClickPlay(View view) {
