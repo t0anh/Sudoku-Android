@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="android.hfad.com.sudoku.SaveAchievementActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/GAME_BACKGROUND_COLOR"
+        >
+        <TextView
+            android:id="@+id/txtDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_alignLeft="@id/layout_content"
+            android:layout_above="@id/txtTimeElapsed"
+            />
+
+        <TextView
+            android:id="@+id/txtTimeElapsed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_alignLeft="@id/layout_content"
+            android:layout_above="@id/layout_content"
+            android:layout_marginTop="5dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/layout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+            <EditText
+                android:id="@+id/edtNickname"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Nickname"
+                android:layout_marginTop="15dp"
+                android:maxLines="1"
+                />
+            <EditText
+                android:id="@+id/edtNote"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edtNickname"
+                android:minLines="5"
+                android:maxLines="5"
+                android:gravity="top|left"
+                android:hint="Bạn đang nghĩ gì?">
+            </EditText>
+
+            <Button
+                android:id="@+id/btnOK"
+                android:background="#1e945f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                android:layout_margin="5dp"
+                android:layout_below="@id/edtNote"
+                android:onClick="onClickOK"/>
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:background="#1e945f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/btnOK"
+                android:layout_below="@id/edtNote"
+                android:onClick="onClickCancel">
+            </Button>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

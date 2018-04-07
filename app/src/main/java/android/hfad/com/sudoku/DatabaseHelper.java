@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper databaseInstance = null;
     private Context context;
 
-    private DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -37,12 +37,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
-            sqLiteDatabase.execSQL(context.getString(R.string.CREATE_PLAYER_TABLE));
-            sqLiteDatabase.execSQL(context.getString(R.string.CREATE_DIFFICULTY_TABLE));
-            sqLiteDatabase.execSQL(context.getString(R.string.CREATE_ACHIEVEMENT_TABLE));
+            sqLiteDatabase.execSQL("CREATE TABLE player (_nickname TEXT PRIMARY KEY)");
+            sqLiteDatabase.execSQL("CREATE TABLE achievement (_id INTEGER PRIMARY KEY AUTOINCREMENT, _nickname TEXT, timeElapsed INTEGER, difficulty TEXT, date TEXT, note TEXT)");
         }
         catch (SQLException e) {
-            Log.d("SQL_ERRORS", e.getMessage());
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

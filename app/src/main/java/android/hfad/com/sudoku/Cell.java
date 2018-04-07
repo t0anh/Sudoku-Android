@@ -62,30 +62,6 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
         }
     }
 
-    public void setState(CellState state) {
-        this.mask = state.mask;
-
-        if (mask != 0 && mask % 2 == 0) {
-            int counter = Integer.bitCount(mask);
-            if (counter > 1) {
-                char[] format = "1  2  3\n4  5  6\n7  8  9".toCharArray();
-                for (int x = 1; x <= 9; ++x) {
-                    if ((mask >> x) % 2 == 0) {
-                        format[indexOfNumber[x]] = ' ';
-                    }
-                }
-                setTextSize(10);
-                setText(String.valueOf(format));
-            } else {
-                setTextSize(CELL_DEFAULT_TEXT_SIZE);
-                setText(String.valueOf(maskToNumber.get(mask)));
-            }
-        } else {
-            mask = 0;
-            setText("");
-        }
-    }
-
     CellState getState() {
         CellState state = new CellState();
         state.mask = mask;
@@ -107,26 +83,7 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     }
 
     public void addNumber(int number) {
-        mask ^= (1 << number);
-        if (mask != 0 && mask % 2 == 0) {
-            int counter = Integer.bitCount(mask);
-            if (counter > 1) {
-                char[] format = "1  2  3\n4  5  6\n7  8  9".toCharArray();
-                for (int x = 1; x <= 9; ++x) {
-                    if ((mask >> x) % 2 == 0) {
-                        format[indexOfNumber[x]] = ' ';
-                    }
-                }
-                setTextSize(10);
-                setText(String.valueOf(format));
-            } else {
-                setTextSize(CELL_DEFAULT_TEXT_SIZE);
-                setText(String.valueOf(maskToNumber.get(mask)));
-            }
-        } else {
-            mask = 0;
-            setText("");
-        }
+        setMask(mask ^ (1 << number));
     }
 
     public int getIndex() {
@@ -165,13 +122,14 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
                         format[indexOfNumber[x]] = ' ';
                     }
                 }
-                setTextSize(10);
+                setTextSize(CELL_DEFAULT_TEXT_SIZE / 2);
                 setText(String.valueOf(format));
             } else {
                 setTextSize(CELL_DEFAULT_TEXT_SIZE);
                 setText(String.valueOf(maskToNumber.get(mask)));
             }
         } else {
+            this.mask = 0;
             setText("");
         }
     }

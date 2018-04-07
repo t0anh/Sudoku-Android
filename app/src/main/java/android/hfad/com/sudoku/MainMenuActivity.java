@@ -17,7 +17,7 @@ public class MainMenuActivity extends Activity {
         /* hide the status bar */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Typeface defaultFont = Typeface.createFromAsset(getAssets(), AppConstant.defaultFontName);
+        Typeface defaultFont = Typeface.createFromAsset(getAssets(), getString(R.string.app_font));
 
         Button btnPlay = findViewById(R.id.btnPlay);
         btnPlay.setTypeface(defaultFont);

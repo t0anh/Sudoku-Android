@@ -48,7 +48,7 @@ public class NumpadButton extends TextView {
     public boolean isOn() {
         return isOn;
     }
-    public void setOn (boolean state) {
+    public void setState(boolean state) {
         isOn = state;
     }
     public int getNumber() {

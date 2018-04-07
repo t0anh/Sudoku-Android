@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 public class SelectDifficultyActivity extends AppCompatActivity {
+    private  int selectedDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,11 @@ public class SelectDifficultyActivity extends AppCompatActivity {
 
         /* get screen size */
         Display display = getWindowManager().getDefaultDisplay();
-        AppConstant.screenSize = new Point();
-        display.getSize(AppConstant.screenSize);
-        int width = AppConstant.screenSize.x / 2;
+        Point screenSize = new Point();
+        display.getSize(screenSize);
+        int width = screenSize.x / 2;
 
-        Typeface defaultFont = Typeface.createFromAsset(getAssets(), AppConstant.defaultFontName);
+        Typeface defaultFont = Typeface.createFromAsset(getAssets(), getString(R.string.app_font));
 
         /* resize buttons */
         Button btnEasy = findViewById(R.id.btn_easy);
@@ -49,26 +50,27 @@ public class SelectDifficultyActivity extends AppCompatActivity {
     public void onClickButton(View view) {
         switch (view.getId()) {
             case R.id.btn_easy: {
-                AppConstant.difficulty = 1;
+                selectedDifficulty = 1;
                 break;
             }
             case R.id.btn_normal: {
-                AppConstant.difficulty = 2;
+                selectedDifficulty = 2;
                 break;
             }
             case R.id.btn_hard: {
-                AppConstant.difficulty = 3;
+                selectedDifficulty = 3;
                 break;
             }
             case R.id.btn_extreme: {
-                AppConstant.difficulty = 4;
+                selectedDifficulty = 4;
                 break;
             }
             default: {
-                AppConstant.difficulty = 0;
+                selectedDifficulty = 0;
             }
         }
         Intent intent = new Intent(SelectDifficultyActivity.this, GameActivity.class);
+        intent.putExtra("difficulty", selectedDifficulty);
         SelectDifficultyActivity.this.startActivity(intent);
     }
 }

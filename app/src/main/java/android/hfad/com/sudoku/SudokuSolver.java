@@ -87,7 +87,7 @@ public class SudokuSolver {
     }
 
 
-    public boolean checkAcceptedGrid(int[][] grid) {
+    public boolean checkValidGrid(int[][] grid) {
         boolean[][] rowSet = new boolean[9][10];
         boolean[][] colSet = new boolean[9][10];
         boolean[][] boxSet = new boolean[9][10];

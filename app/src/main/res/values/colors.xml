@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#268b78</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#5a32c7</color>
     <!--here is my color-->
     <color name="EVEN_BOX_COLOR">#bbefca</color>
     <color name="ODD_BOX_COLOR">#9bc6a7</color>
@@ -18,6 +18,10 @@
     <color name="MY_DARK">#3e3e3e</color>
     <color name="HIGHLIGHT_BUTTON_COLOR">#118740</color>
     <color name="MARKED_CELL_COLOR">#f9c147</color>
-
     <color name="black_overlay">#66000000</color>
+    <color name="EASY_COLOR">#419c44</color>
+    <color name="NORMAL_COLOR"> #0099cc</color>
+    <color name="HARD_COLOR">#ff8800</color>
+    <color name="EXTREME_COLOR">#ff1e00</color>
+
 </resources>

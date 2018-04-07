@@ -7,44 +7,89 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent"
+        android:background="#b2c793">
+
+        <TextView
+            android:id="@+id/txtSelectedDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/scrollView1"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:text="Current Difficulty"
+            android:textSize="50dp" />
+
         <TextView
             android:id="@+id/txtEasy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EASY"
-            android:textSize="20dp"
+            android:background="@color/EASY_COLOR"
             android:gravity="center"
-            />
+            android:padding="10dp"
+            android:text="EASY"
+            android:textColor="@android:color/black" />
+
         <TextView
             android:id="@+id/txtNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NORMAL"
-            android:textSize="20dp"
+            android:layout_toRightOf="@+id/txtEasy"
+            android:background="@color/NORMAL_COLOR"
             android:gravity="center"
-            android:layout_toRightOf="@id/txtEasy"
-            />
+            android:padding="10dp"
+            android:text="NORMAL"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/txtHard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HARD"
-            android:textSize="20dp"
-            android:gravity="center"
             android:layout_toRightOf="@id/txtNormal"
-            />
+            android:background="@color/HARD_COLOR"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="HARD"
+            android:textColor="@android:color/black" />
+
         <TextView
             android:id="@+id/txtExtreme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EXTREME"
-            android:textSize="20dp"
-            android:gravity="center"
             android:layout_toRightOf="@id/txtHard"
-            />
+            android:background="@color/EXTREME_COLOR"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="EXTREME"
+            android:textColor="@android:color/black" />
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#3d455b">
+
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/RelativeLayout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:id="@+id/table_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+            </HorizontalScrollView>
+        </ScrollView>
     </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>
 
