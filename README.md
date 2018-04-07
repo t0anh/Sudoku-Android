@@ -13,12 +13,7 @@ Game sudoku trên android
 - Hoàn thiện giao diện
 # Cập nhật 2
 - Hoàn thiện giao diện
-- Cập nhật document trong thư mục `docs`
-- Preview:
-
-![alt text](https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/game_activity.png)
-![alt text](https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/menu.png)
-
+- Cập nhật document trong thư mục `documents`
 # Cập nhật 3
 - Tối ưu hiệu năng
 - Cập nhật tính năng xem đáp án
@@ -27,3 +22,13 @@ Game sudoku trên android
 - Cập nhật giao diện
 - Cập nhật chức năng Reset, Solve
 - Cập nhật API (`Sudoku Solver`)
+# Cập nhật 5 + 6 + 7
+- Thêm tính năng lưu thành tích, bảng thành tích
+- Hoàn thiện giao diện, tính năng
+- Preview:
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/main_menu.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/menu.png" width="300" height="530">
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/playing.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/solved.png" width="300" height="530">
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/save_achievement.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/extreme_ladderboard.png" width="300" height="530">
