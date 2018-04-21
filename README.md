@@ -32,3 +32,16 @@ Game sudoku trên android
 <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/playing.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/solved.png" width="300" height="530">
 
 <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/save_achievement.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/extreme_ladderboard.png" width="300" height="530">
+# Cập nhật 8 (final)
+- Thêm tính năng Resume
+- Hoàn thiện giao diện
+- Tối ưu hiệu năng
+- Preview:
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/main_menu_final.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/menu_final.png" width="300" height="530">
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/begin_final.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/playing_final.png" width="300" height="530">
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/solved_final.png" width="300" height="530"> <img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/save_achievement_final.png" width="300" height="530">
+
+<img src="https://github.com/tuananhcnt55vmu/Sudoku-Android/blob/master/preview/ladderboard_final.png" width="300" height="530">
