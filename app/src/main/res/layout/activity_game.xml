@@ -19,11 +19,11 @@
             >
 
             <ImageView
-                android:id="@+id/timer_icon"
+                android:id="@+id/ic_timer"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_toLeftOf="@id/time"
-                android:src="@drawable/timer"
+                android:src="@drawable/ic_timer"
                 android:layout_centerVertical="true"
                 />
 
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
-                android:textColor="#000000"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="30dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
@@ -44,9 +44,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
-                android:textSize="20dp"
+                android:textSize="18sp"
                 android:onClick="onClickSubmit"
                 android:backgroundTint="@color/SUBMIT_BUTTON_COLOR"
+                android:textColor="#FFFFFF"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"

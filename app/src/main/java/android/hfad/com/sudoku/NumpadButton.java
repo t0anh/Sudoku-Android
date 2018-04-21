@@ -25,7 +25,7 @@ public class NumpadButton extends TextView {
         setBackgroundResource(R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
         setText(buttonText[position]);
         setGravity(Gravity.CENTER);
-        setTypeface(GameActivity.defaultFont);
+        setTypeface(GameActivity.appFont);
 
         if(position == 10) {
             setTextSize(12);

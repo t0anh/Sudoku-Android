@@ -3,14 +3,14 @@ package android.hfad.com.sudoku;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class SelectDifficultyActivity extends AppCompatActivity {
+public class DifficultyMenuActivity extends AppCompatActivity {
     private  int selectedDifficulty;
 
     @Override
@@ -69,8 +69,8 @@ public class SelectDifficultyActivity extends AppCompatActivity {
                 selectedDifficulty = 0;
             }
         }
-        Intent intent = new Intent(SelectDifficultyActivity.this, GameActivity.class);
+        Intent intent = new Intent(DifficultyMenuActivity.this, GameActivity.class);
         intent.putExtra("difficulty", selectedDifficulty);
-        SelectDifficultyActivity.this.startActivity(intent);
+        DifficultyMenuActivity.this.startActivity(intent);
     }
 }

@@ -2,7 +2,6 @@ package android.hfad.com.sudoku;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 
@@ -10,8 +9,7 @@ import android.util.DisplayMetrics;
  * Created by tuana on 19-03-2018.
  */
 
-public class AppConstant {
-
+public class AppConverter {
     public static float convertDpToPixel (float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -19,7 +17,7 @@ public class AppConstant {
         return px;
     }
 
-    public static String toSecondMinuteFormat (String time) {
+    public static String getTimeFormat (String time) {
         int totalSeconds;
         try {
             totalSeconds = Integer.parseInt(time);

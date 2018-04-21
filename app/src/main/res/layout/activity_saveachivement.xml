@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_centerHorizontal="true"
             android:layout_alignLeft="@id/layout_content"
             android:layout_above="@id/txtTimeElapsed"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_centerHorizontal="true"
             android:layout_alignLeft="@id/layout_content"
             android:layout_above="@id/layout_content"
@@ -44,12 +44,14 @@
                 android:id="@+id/edtNickname"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:hint="Nickname"
                 android:layout_marginTop="15dp"
                 android:maxLines="1"
                 />
             <EditText
                 android:id="@+id/edtNote"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edtNickname"
@@ -61,18 +63,21 @@
 
             <Button
                 android:id="@+id/btnOK"
-                android:background="#1e945f"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
                 android:textSize="18dp"
+                android:background="@drawable/rounded_corner"
+                android:textColor="#F0F0F0F0"
                 android:layout_margin="5dp"
                 android:layout_below="@id/edtNote"
                 android:onClick="onClickOK"/>
 
+
             <Button
                 android:id="@+id/btnCancel"
-                android:background="#1e945f"
+                android:background="@drawable/rounded_corner"
+                android:textColor="#F0F0F0F0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"

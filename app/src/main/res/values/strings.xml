@@ -3,12 +3,9 @@
     <string name="tutorial">
         Mỗi ô trong hàng, cột, hộp cần điền duy nhất một số từ 1 tới 9 và không ô nào được trùng nhau.\n\n
         Chú ý:\n
-        - Click vào biểu tượng [img src=ic_reset/] để xóa toàn bộ số đã điền.\n
+        - Click vào biểu tượng [img src=ic_reset/] để xóa toàn bộ số bạn đã điền.\n
         - Click vào biểu tượng [img src=ic_hint/] để xem gợi ý.\n
+        - Click vào biểu tượng [img src=ic_solve/] để xem lời giải mẫu.\n
     </string>
-
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="app_font">FallingSkyBd.otf</string>
+    <string name="app_font"> FallingSkyBd.otf </string>
 </resources>

@@ -5,19 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
-
 /**
  * Created by tuana on 17-03-2018.
  */
 
 public class BoxAdapter extends BaseAdapter {
     Context context;
-    int parentIndex;
+    int boxIndex;
 
     public BoxAdapter (Context context, int boxIndex) {
         this.context = context;
-        this.parentIndex = boxIndex;
+        this.boxIndex = boxIndex;
     }
 
     @Override
@@ -37,8 +35,8 @@ public class BoxAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        int row = (parentIndex / 3) * 3 + position / 3;
-        int col = (parentIndex % 3) * 3 + position % 3;
+        int row = (boxIndex / 3) * 3 + position / 3;
+        int col = (boxIndex % 3) * 3 + position % 3;
         return GameActivity.cells[row][col];
     }
 }

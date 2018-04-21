@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,26 +36,24 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     private boolean isLocked, isMarked;
     private int mask, index;
 
-    public Cell(Context context, int index, int number, int defaultColor) {
+    public Cell(Context context, int index, int highlightColor, int defaultColor) {
         super(context);
         this.index = index;
         this.defaultColor = defaultColor;
+        this.highlightColor = highlightColor;
+
 
         markedColor = R.color.MARKED_CELL_COLOR;
         setHeight(CELL_HEIGHT);
         setGravity(Gravity.CENTER);
-        setTypeface(GameActivity.defaultFont);
+        setTypeface(GameActivity.appFont);
         setBackgroundResource(defaultColor);
 
-        if (number <= 9) {
+        if (highlightColor == R.color.HIGHLIGHT_LOCKED_CELL_COLOR) {
             isLocked = true;
-            addNumber(number);
-            highlightColor = R.color.HIGHLIGHT_LOCKED_CELL_COLOR;
             setTextColor(Color.BLACK);
         } else {
             isLocked = false;
-            addNumber(0);
-            highlightColor = R.color.HIGHLIGHT_EMPTY_CELL_COLOR;
             setTextColor(Color.BLUE);
         }
     }
@@ -107,8 +103,8 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     }
 
     public void setNumber(int number) {
-        mask = (1 << number);
-        setText(String.valueOf(number));
+        int mask = (1 << number);
+        setMask(mask);
     }
 
     public void setMask(int mask) {

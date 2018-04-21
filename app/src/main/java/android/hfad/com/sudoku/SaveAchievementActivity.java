@@ -1,6 +1,5 @@
 package android.hfad.com.sudoku;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,8 +16,6 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.SimpleTimeZone;
 
 public class SaveAchievementActivity extends AppCompatActivity {
     private TextView txtDifficulty, txtTimeElapsed;
@@ -76,8 +73,8 @@ public class SaveAchievementActivity extends AppCompatActivity {
         String nickname = String.valueOf(edtNickname.getText());
         if(nickname.length() > 0) {
             try {
-                DatabaseHelper DBHelpter = DatabaseHelper.newInstance(this);
-                SQLiteDatabase database = DBHelpter.getWritableDatabase();
+                DatabaseHelper DBHelper = DatabaseHelper.newInstance(this);
+                SQLiteDatabase database = DBHelper.getWritableDatabase();
 
                 // insert into achievement table
                 SimpleDateFormat formatFactory = new SimpleDateFormat("dd/MM/yyyy");
@@ -95,7 +92,6 @@ public class SaveAchievementActivity extends AppCompatActivity {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
             finally {
-                GameActivity.setGameState(-3);
                 onBackPressed();
             }
         }

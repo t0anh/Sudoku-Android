@@ -1,16 +1,9 @@
 package android.hfad.com.sudoku;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ImageSpan;
-import android.util.AttributeSet;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

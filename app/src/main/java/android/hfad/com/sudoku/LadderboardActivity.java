@@ -3,13 +3,11 @@ package android.hfad.com.sudoku;
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.os.CountDownTimer;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,7 +25,6 @@ public class LadderboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ladderboard);
-
         getSupportActionBar().hide();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -116,19 +113,19 @@ public class LadderboardActivity extends AppCompatActivity {
         TableRow header = new TableRow(this);
         header.setClickable(false);
 
-        TextView rankHeader = new TableCell(this, "Rank", w + w / 2, appFont);
+        TextView rankHeader = new LadderboardCell(this, "Rank", w + w / 2, appFont);
         header.addView(rankHeader);
 
-        TextView nicknameHeader = new TableCell(this, "Nickname", 3 * w, appFont);
+        TextView nicknameHeader = new LadderboardCell(this, "Nickname", 3 * w, appFont);
         header.addView(nicknameHeader);
 
-        TextView timeElapsedHeader = new TableCell(this, "Time", w + w / 2, appFont);
+        TextView timeElapsedHeader = new LadderboardCell(this, "Time", w + w / 2, appFont);
         header.addView(timeElapsedHeader);
 
-        TextView dateHeader = new TableCell(this, "Date", 3 * w, appFont);
+        TextView dateHeader = new LadderboardCell(this, "Date", 3 * w, appFont);
         header.addView(dateHeader);
 
-        TextView noteHeader = new TableCell(this, "Note", 3 * w, appFont);
+        TextView noteHeader = new LadderboardCell(this, "Note", 3 * w, appFont);
         header.addView(noteHeader);
 
         table.addView(header);
@@ -157,19 +154,19 @@ public class LadderboardActivity extends AppCompatActivity {
                 cursor.moveToNext();
             }
 
-            TextView rankCell = new TableCell(this, rank, w + w / 2, appFont);
+            TextView rankCell = new LadderboardCell(this, rank, w + w / 2, appFont);
             newRow.addView(rankCell);
 
-            TextView nicknameCell = new TableCell(this, nickname, 3 * w, appFont);
+            TextView nicknameCell = new LadderboardCell(this, nickname, 3 * w, appFont);
             newRow.addView(nicknameCell);
 
-            TextView timeCell = new TableCell(this, AppConstant.toSecondMinuteFormat(time), w + w / 2, appFont);
+            TextView timeCell = new LadderboardCell(this, AppConverter.getTimeFormat(time), w + w / 2, appFont);
             newRow.addView(timeCell);
 
-            TextView dateCell = new TableCell(this, date, 3 * w, appFont);
+            TextView dateCell = new LadderboardCell(this, date, 3 * w, appFont);
             newRow.addView(dateCell);
 
-            TextView noteCell = new TableCell(this, note, 3 * w, appFont);
+            TextView noteCell = new LadderboardCell(this, note, 3 * w, appFont);
             newRow.addView(noteCell);
 
             table.addView(newRow);

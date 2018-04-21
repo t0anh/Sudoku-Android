@@ -22,30 +22,44 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             android:background="@android:drawable/dialog_holo_dark_frame"
-            android:src="@drawable/sudoku_icon" />
+            android:src="@drawable/ic_sudoku" />
 
         <Button
             android:id="@+id/btnPlay"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="10dp"
-            android:background="#1e945f"
+            android:layout_margin="5dp"
             android:onClick="onClickPlay"
             android:text="Play"
+            android:background="@drawable/rounded_corner"
+            android:textColor="#F0F0F0"
             android:textAllCaps="false"
             android:textSize="30dp" />
-
+        <Button
+            android:id="@+id/btnResume"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnPlay"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_corner"
+            android:textColor="#F0F0F0"
+            android:onClick="onClickResume"
+            android:text="Resume"
+            android:visibility="invisible"
+            android:textAllCaps="false"
+            android:textSize="25dp"
+            />
         <Button
             android:id="@+id/btnLadderBoard"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnPlay"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
-            android:background="#1e945f"
+            android:layout_below="@id/btnResume"
+            android:layout_margin="5dp"
             android:onClick="onClickLadderboard"
             android:text="Ladderboard"
+            android:background="@drawable/rounded_corner"
+            android:textColor="#F0F0F0"
             android:textAllCaps="false"
             android:textSize="25dp" />
     </RelativeLayout>

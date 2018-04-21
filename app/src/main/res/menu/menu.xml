@@ -7,13 +7,14 @@
         android:icon="@drawable/ic_reset"
         yourapp:showAsAction="always" />
     <item
-        android:id="@+id/action_solve"
-        android:title="Xem đáp án"
-        yourapp:showAsAction="never" />
-    <item
         android:id="@+id/action_autofill"
         android:icon="@drawable/ic_hint"
         android:title="Gợi ý"
+        yourapp:showAsAction="always" />
+    <item
+        android:id="@+id/action_solve"
+        android:title="Xem đáp án"
+        android:icon="@drawable/ic_solve"
         yourapp:showAsAction="always" />
     <item
         android:id="@+id/action_tutorial"
@@ -21,5 +22,4 @@
         yourapp:showAsAction="always"
         android:icon="@drawable/ic_tutorial_1"
         />
-
 </menu>
