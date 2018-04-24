@@ -9,21 +9,23 @@ import android.widget.BaseAdapter;
  * Created by tuana on 17-03-2018.
  */
 
-public class GridAdapter extends BaseAdapter {
-    Context context;
+public class SudokuGridAdapter extends BaseAdapter {
+    Context mContext;
+    Box[] mBoxes;
 
-    public GridAdapter(Context context) {
-        this.context = context;
+    public SudokuGridAdapter(Context context, Box[] boxes) {
+        mContext = context;
+        mBoxes = boxes;
     }
 
     @Override
     public int getCount() {
-        return 9;
+        return mBoxes.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return GameActivity.boxes[i];
+        return mBoxes[i];
     }
 
     @Override
@@ -33,6 +35,6 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        return GameActivity.boxes[i];
+        return mBoxes[i];
     }
 }

@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,69 +13,61 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
 import static android.widget.Toast.LENGTH_LONG;
 
 public class GameActivity extends AppCompatActivity {
-    static final int[] numberOfEmptyCells = {0, 30, 35, 40, 50};
+    static final int[] numberOfEmptyCells = {0, 30, 35, 45, 50};
     static final String[] difficultName = {"NONE", "Easy", "Normal", "Hard", "Extreme"};
-    static final int[] numpadPosition = {10, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
-    static GridView sudoku, numpad;
-    static Box[] boxes = new Box[9];
+    static SudokuGrid grid;
+    static Numpad numpad;
     static Cell[][] cells = new Cell[9][9];
     static Cell selectedCell;
-    static Typeface appFont;
+    static Stack<CellState> stack = new Stack<>();
 
-    private SudokuSolver solver = new SudokuSolver();
+    SudokuSolver solver = new SudokuSolver();
+    boolean wannaBack = false;
 
     /* game state */
     private int[][] solution = new int[9][9];
-    private int[][] grid = new int[9][9];
+    private int[][] cellMasks = new int[9][9];
     private int timeElapsed;
     private int difficulty;
-    private int status;
+    private static int status; // -3 game done | -2: auto solved | -1: auto fill | 0: playing | 1: player solved
+
 
     /* timer */
     private TextView timeText;
     private Handler handler;
     private Runnable runnable;
 
-
-    Stack<CellState> stack = new Stack<>();
-    boolean wannaBack = false;
-
     private void generateData() {
-        /* generate a grid*/
+        // generate a grid
         solution = solver.getRandomGrid(numberOfEmptyCells[difficulty]);
 
-        grid = new int[9][9];
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
-                grid[row][col] = (solution[row][col] > 9) ? 0 : solution[row][col];
+                cellMasks[row][col] = (solution[row][col] > 9) ? 0 : solution[row][col];
             }
         }
-        /* fill values to cells */
+        // set cell value
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
                 int box = (row / 3) * 3 + col / 3;
-                int number = grid[row][col];
+                int number = cellMasks[row][col];
                 int highlightColor = (number == 0) ? R.color.HIGHLIGHT_EMPTY_CELL_COLOR : R.color.HIGHLIGHT_LOCKED_CELL_COLOR;
                 int defaultColor = (box % 2 == 0) ? R.color.EVEN_BOX_COLOR : R.color.ODD_BOX_COLOR;
 
@@ -87,26 +78,26 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void restoreData(String solutionString, String gridString) {
-        /* restore solution */
+        // restore solution
         Scanner scanner = new Scanner(solutionString);
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
                 solution[row][col] = scanner.nextInt();
             }
         }
-        /* restore grid */
+        // restore cellMasks
         scanner = new Scanner(gridString);
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
-                grid[row][col] = scanner.nextInt();
+                cellMasks[row][col] = scanner.nextInt();
             }
         }
 
-        /* restore cells */
+        // set cell value
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
                 int box = (row / 3) * 3 + col / 3;
-                int mask = grid[row][col];
+                int mask = cellMasks[row][col];
                 int highlightColor = (solution[row][col] > 9) ? R.color.HIGHLIGHT_EMPTY_CELL_COLOR : R.color.HIGHLIGHT_LOCKED_CELL_COLOR;
                 int defaultColor = (box % 2 == 0) ? R.color.EVEN_BOX_COLOR : R.color.ODD_BOX_COLOR;
 
@@ -116,27 +107,21 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void initComponents() {
-        sudoku = findViewById(R.id.main_grid);
-        numpad = findViewById(R.id.numpad);
-        appFont = Typeface.createFromAsset(getAssets(), getString(R.string.app_font));
-        /* compute cell height */
-        Display screen = getWindowManager().getDefaultDisplay();
-        Point screenSize = new Point();
-        screen.getSize(screenSize);
 
-        int width = screenSize.x;
-        Cell.CELL_HEIGHT = (width - 120) / 9;
+
+    private void initComponents() {
+        grid = new SudokuGrid(this, (GridView) findViewById(R.id.grid_sudoku));
+        numpad = new Numpad(this, (GridView) findViewById(R.id.grid_numpad));
         /* submit button */
-        Button btnSubmit = findViewById(R.id.submit_button);
-        btnSubmit.setTypeface(appFont);
+        Button btnSubmit = findViewById(R.id.btn_submit);
+        btnSubmit.setTypeface(AppConverter.appFont);
         /* timeText */
-        timeText = findViewById(R.id.time);
+        timeText = findViewById(R.id.txt_elapsed_time);
         timeText.setTypeface(timeText.getTypeface(), Typeface.BOLD);
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void initGame() {
+    private void loadData() {
         Bundle bundle = getIntent().getExtras();
         difficulty = bundle.getInt("difficulty", 0);
         status = bundle.getInt("status", 0);
@@ -149,69 +134,16 @@ public class GameActivity extends AppCompatActivity {
         } else {
             restoreData(solutionString, gridString);
         }
-
-        // set onTouchListener for cells
-        for (int row = 0; row < 9; ++row) {
-            for (int col = 0; col < 9; ++col) {
-                cells[row][col].setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                            Cell cell = (Cell) view;
-                            highlightNeighborCells(cell.getIndex());
-                            if (cell.isLocked()) {
-                                numpad.setVisibility(View.INVISIBLE);
-                            } else {
-                                cell.setBackgroundResource(cell.isMarked() ? R.color.MARKED_CELL_COLOR : R.color.TARGET_CELL_COLOR);
-                                int mask = cell.getMask();
-                                for (int number = 1; number <= 9; ++number) {
-                                    if (((mask >> number) & 1) == 1) {
-                                        numpad.getChildAt(numpadPosition[number]).setBackgroundResource(R.color.NUMPAD_BUTTON_MARKED_COLOR);
-                                    } else {
-                                        numpad.getChildAt(numpadPosition[number]).setBackgroundResource(R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
-                                    }
-                                }
-                                numpad.setVisibility(View.VISIBLE);
-                            }
-                            selectedCell = cell;
-                            updateNumpad();
-                        }
-                        return false;
-                    }
-                });
-            }
-        }
-
-        /* setup timer*/
-        handler = new Handler();
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                timeElapsed += 1;
-                handler.postDelayed(this, 1000);
-
-                int seconds = timeElapsed % 60;
-                int minutes = (timeElapsed / 60) % 60;
-                int hours = timeElapsed / 3600;
-
-                if (hours == 0) {
-                    timeText.setText(String.format("%02d:%02d", minutes, seconds));
-                } else {
-                    timeText.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-                }
-            }
-        };
-        runnable.run();
     }
 
     private void saveGame() {
         if (status < -1) return;
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
-                grid[row][col] = cells[row][col].getMask();
+                cellMasks[row][col] = cells[row][col].getMask();
             }
         }
-        GameState state = new GameState(status, difficulty, timeElapsed, solution, grid);
+        GameState state = new GameState(status, difficulty, timeElapsed, solution, cellMasks);
         try {
             DatabaseHelper DBHelper = DatabaseHelper.newInstance(this);
             SQLiteDatabase database = DBHelper.getWritableDatabase();
@@ -275,7 +207,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void onClickAutoFill() {
-        if (status == -2) return;
+        if (status < -1) return;
         if (status == -1) {
             autoFill();
         } else {
@@ -328,7 +260,7 @@ public class GameActivity extends AppCompatActivity {
         for (int row = 0; row < 9; ++row) {
             for (int col = 0; col < 9; ++col) {
                 if (!cells[row][col].isLocked()) {
-                    int mask = 1022; // full numbers
+                    int mask = 1022; // full numbers: 2^10 - 2.
                     int box = (row / 3) * 3 + col / 3;
                     for (int x = 1; x <= 9; ++x) {
                         if (rowSet[row][x] || colSet[col][x] || boxSet[box][x]) mask &= ~(1 << x);
@@ -337,6 +269,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
+        updateNumpad();
     }
 
     @SuppressLint({"ResourceAsColor", "ClickableViewAccessibility"})
@@ -345,63 +278,35 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        loadData();
         initComponents();
-        initGame();
 
-        /* setup action bar title */
+        // setup action bar title
         getSupportActionBar().setTitle(difficultName[difficulty]);
 
-        /* hide the status bar */
+        // hide the status bar
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        /* setup sudoku gridview */
-        int boxHeight = Cell.CELL_HEIGHT * 3 + 2 * Box.BOX_LINE_SPACING;
-        for (int i = 0; i < 9; ++i) {
-            boxes[i] = new Box(this);
-            BoxAdapter adapter = new BoxAdapter(this, i);
-            boxes[i].setAdapter(adapter);
-            boxes[i].setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, boxHeight));
-        }
-
-        GridAdapter adapter = new GridAdapter(this);
-        sudoku.setAdapter(adapter);
-
-        /* setup numpad */
-        ArrayList<NumpadButton> buttons = new ArrayList<>();
-        for (int pos = 0; pos < 12; ++pos) {
-            buttons.add(new NumpadButton(this, pos));
-        }
-
-        NumpadAdapter numpadAdapter = new NumpadAdapter(this, buttons);
-        numpad.setAdapter(numpadAdapter);
-        numpad.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // setup timer
+        handler = new Handler();
+        runnable = new Runnable() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                NumpadButton button = (NumpadButton) view;
-                int number = button.getNumber();
-                if (number < 10) {
-                    // add a number
-                    stack.push(selectedCell.getState());
-                    selectedCell.addNumber(number);
-                } else if (number == 10) {
-                    // mark selected cell
-                    selectedCell.setMarked(!selectedCell.isMarked());
-                } else if (number == 11) {
-                    // backup previous state
-                    if (!stack.isEmpty()) {
-                        CellState preState = stack.peek();
-                        stack.pop();
-                        int index = preState.cellIndex;
-                        int row = index / 9;
-                        int col = index - row * 9;
-                        cells[row][col].setMask(preState.mask);
-                    }
+            public void run() {
+                timeElapsed += 1;
+                handler.postDelayed(this, 1000);
+
+                int seconds = timeElapsed % 60;
+                int minutes = (timeElapsed / 60) % 60;
+                int hours = timeElapsed / 3600;
+
+                if (hours == 0) {
+                    timeText.setText(String.format("%02d:%02d", minutes, seconds));
+                } else {
+                    timeText.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
                 }
-                updateNumpad();
             }
-        });
-
-
+        };
+        runnable.run();
     }
 
     public static void highlightNeighborCells(int index) {
@@ -411,10 +316,6 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
-                if (cells[i][j].isMarked()) {
-                    cells[i][j].setBackgroundResource(R.color.MARKED_CELL_COLOR);
-                    continue;
-                }
                 int k = (i / 3) * 3 + j / 3;
                 if (i == row || j == col || k == box) {
                     cells[i][j].setHighLight();
@@ -427,18 +328,7 @@ public class GameActivity extends AppCompatActivity {
 
     public static void updateNumpad() {
         if (selectedCell != null) {
-            int mask = selectedCell.getMask();
-            for (int x = 1; x <= 9; ++x) {
-                NumpadButton button = (NumpadButton) numpad.getChildAt(numpadPosition[x]);
-                button.setState((mask >> x) % 2 == 1);
-                button.setBackgroundResource(button.isOn() ? R.color.NUMPAD_BUTTON_MARKED_COLOR : R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
-            }
-
-            if (selectedCell.isMarked()) {
-                numpad.getChildAt(5).setBackgroundResource(R.color.MARKED_CELL_COLOR);
-            } else {
-                numpad.getChildAt(5).setBackgroundResource(R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
-            }
+            numpad.update(selectedCell.getMask(), selectedCell.isMarked());
         }
     }
 
@@ -462,7 +352,6 @@ public class GameActivity extends AppCompatActivity {
                         .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                status = -3;
                                 saveAchievement();
                             }
                         })
@@ -476,6 +365,7 @@ public class GameActivity extends AppCompatActivity {
                 handler.removeCallbacks(runnable);
                 status = 1;
             }
+            status = -3;
         } else {
             Toast.makeText(this, "Đáp án sai", LENGTH_LONG).show();
         }
@@ -522,7 +412,7 @@ public class GameActivity extends AppCompatActivity {
                         cells[row][col].setTextColor(Color.RED);
                         cells[row][col].setTextSize(Cell.CELL_DEFAULT_TEXT_SIZE);
                     }
-                    numpad.setEnabled(false);
+                    updateNumpad();
                 }
             }
             handler.removeCallbacks(runnable);
@@ -530,7 +420,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void onClickReset() {
-        if (status == -2) return;
+        if (status < -1) return;
         for (Cell[] row : cells) {
             for (Cell cell : row) {
                 if (!cell.isLocked()) {
@@ -538,6 +428,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
+        updateNumpad();
     }
 
     public boolean isLegalGrid() {
@@ -549,5 +440,28 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public static void onPressNumpad(int number) {
+        if(status < -1) return;
+        if (number < 10) {
+            // add a number
+            stack.push(selectedCell.getState());
+            selectedCell.addNumber(number);
+        } else if (number == 10) {
+            // mark selected cell
+            selectedCell.setMarked(!selectedCell.isMarked());
+        } else if (number == 11) {
+            // backup previous state
+            if (!stack.isEmpty()) {
+                CellState preState = stack.peek();
+                stack.pop();
+                int index = preState.cellIndex;
+                int row = index / 9;
+                int col = index - row * 9;
+                cells[row][col].setMask(preState.mask);
+            }
+        }
+        updateNumpad();
     }
 }

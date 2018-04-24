@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -21,11 +25,11 @@ public class NumpadButton extends TextView {
     public NumpadButton(Context context, int position) {
         super(context);
         this.position = position;
-        setHeight(Cell.CELL_HEIGHT);
         setBackgroundResource(R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
         setText(buttonText[position]);
         setGravity(Gravity.CENTER);
-        setTypeface(GameActivity.appFont);
+        setTypeface(AppConverter.appFont);
+        setHeight(Cell.CELL_HEIGHT);
 
         if(position == 10) {
             setTextSize(12);
@@ -53,5 +57,14 @@ public class NumpadButton extends TextView {
     }
     public int getNumber() {
         return number[position];
+    }
+
+    @Override
+    public boolean onTouchEvent (MotionEvent motionEvent) {
+        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            int number = getNumber();
+            GameActivity.onPressNumpad(number);
+        }
+        return true;
     }
 }

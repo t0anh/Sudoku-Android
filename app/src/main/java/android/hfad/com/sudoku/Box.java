@@ -10,7 +10,8 @@ import android.widget.GridView;
  */
 
 public class Box extends GridView {
-    static final int BOX_LINE_SPACING = 4;
+    static int BOX_LINE_SPACING = 4;
+    static int BOX_HEIGHT = Cell.CELL_HEIGHT * 3 + 2 * Box.BOX_LINE_SPACING;
 
     public Box(Context context) {
         super(context);
@@ -19,5 +20,6 @@ public class Box extends GridView {
         setNumColumns(3);
         setGravity(Gravity.CENTER);
         setBackgroundResource(R.color.GRID_BACKGROUND_COLOR);
+        setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, BOX_HEIGHT));
     }
 }

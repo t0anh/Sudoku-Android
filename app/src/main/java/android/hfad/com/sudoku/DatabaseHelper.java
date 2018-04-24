@@ -34,7 +34,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
-            sqLiteDatabase.execSQL("CREATE TABLE Player (_nickname TEXT PRIMARY KEY)");
             sqLiteDatabase.execSQL("CREATE TABLE Achievement (_id INTEGER PRIMARY KEY AUTOINCREMENT, _nickname TEXT, timeElapsed INTEGER, difficulty TEXT, date TEXT, note TEXT)");
             sqLiteDatabase.execSQL("CREATE TABLE GameState (id INTEGER PRIMARY KEY AUTOINCREMENT, difficulty int, status INTEGER, timeElapsed INTEGER, solutionString TEXT, gridString TEXT, createdDate DateTime DEFAULT (DateTime('now', 'localtime')))");
         }

@@ -3,7 +3,11 @@ package android.hfad.com.sudoku;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +18,9 @@ import java.util.Map;
 @SuppressLint("ResourceAsColor")
 public class Cell extends android.support.v7.widget.AppCompatTextView {
     static public int CELL_DEFAULT_TEXT_SIZE = 18;
-    static public int CELL_HEIGHT = 80;
+    static public int CELL_HEIGHT;
     static private final int[] indexOfNumber = {0, 0, 3, 6, 8, 11, 14, 16, 19, 22}; // in format cell string
+    static final int MARKED_CELL_COLOR = R.color.MARKED_CELL_COLOR;
     static public final Map<Integer, Integer> maskToNumber = new HashMap<Integer, Integer>() {
         {
             put(0, 0);
@@ -42,11 +47,10 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
         this.defaultColor = defaultColor;
         this.highlightColor = highlightColor;
 
-
         markedColor = R.color.MARKED_CELL_COLOR;
         setHeight(CELL_HEIGHT);
         setGravity(Gravity.CENTER);
-        setTypeface(GameActivity.appFont);
+        setTypeface(AppConverter.appFont);
         setBackgroundResource(defaultColor);
 
         if (highlightColor == R.color.HIGHLIGHT_LOCKED_CELL_COLOR) {
@@ -95,11 +99,13 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     }
 
     public void setHighLight() {
-        setBackgroundResource(highlightColor);
+        int color = isMarked ? MARKED_CELL_COLOR : highlightColor;
+        setBackgroundResource(color);
     }
 
     public void setNoHighLight() {
-        setBackgroundResource(defaultColor);
+        int color = isMarked ? MARKED_CELL_COLOR : defaultColor;
+        setBackgroundResource(color);
     }
 
     public void setNumber(int number) {
@@ -128,5 +134,19 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
             this.mask = 0;
             setText("");
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        GameActivity.highlightNeighborCells(index);
+        if (isLocked) {
+            GameActivity.numpad.setVisibility(View.INVISIBLE);
+        } else {
+            setBackgroundResource(isMarked ? R.color.MARKED_CELL_COLOR : R.color.TARGET_CELL_COLOR);
+            GameActivity.numpad.setVisibility(View.VISIBLE);
+        }
+        GameActivity.selectedCell = this;
+        GameActivity.updateNumpad();
+        return true;
     }
 }

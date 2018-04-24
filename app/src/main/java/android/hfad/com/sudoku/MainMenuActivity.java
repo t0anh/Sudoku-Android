@@ -21,6 +21,7 @@ public class MainMenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AppConverter.init(this);
         Typeface appFont = Typeface.createFromAsset(getAssets(), getString(R.string.app_font));
         /* hide the status bar */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -96,7 +97,7 @@ public class MainMenuActivity extends Activity {
                 gridString = cursor.getString(cursor.getColumnIndex("gridString"));
                 id = cursor.getString(cursor.getColumnIndex("id"));
 
-                /* remove old data*/
+                // remove old data
                 database.execSQL("DELETE FROM GameState WHERE 1");
 
                 intent.putExtra("status", Integer.parseInt(status));

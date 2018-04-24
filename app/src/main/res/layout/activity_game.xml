@@ -11,7 +11,7 @@
         android:background="@color/GAME_BACKGROUND_COLOR"
         >
         <RelativeLayout
-            android:id="@+id/info_panel"
+            android:id="@+id/layout_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -22,13 +22,13 @@
                 android:id="@+id/ic_timer"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_toLeftOf="@id/time"
+                android:layout_toLeftOf="@id/txt_elapsed_time"
                 android:src="@drawable/ic_timer"
                 android:layout_centerVertical="true"
                 />
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/txt_elapsed_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
@@ -40,7 +40,7 @@
                 android:layout_margin="10px"
                 />
             <Button
-                android:id="@+id/submit_button"
+                android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
@@ -55,7 +55,7 @@
                 />
         </RelativeLayout>
         <GridView
-            android:id="@+id/main_grid"
+            android:id="@+id/grid_sudoku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="3"
@@ -67,23 +67,24 @@
             android:paddingTop="3dp"
             android:paddingLeft="3dp"
             android:paddingRight="2dp"
-            android:layout_below="@+id/info_panel"
+            android:layout_below="@+id/layout_top"
             >
         </GridView>
 
         <GridView
-            android:id="@+id/numpad"
+            android:id="@+id/grid_numpad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/GRID_BACKGROUND_COLOR"
             android:gravity="center"
             android:horizontalSpacing="2dp"
             android:verticalSpacing="2dp"
+            android:layout_marginTop="10dp"
             android:padding="3dp"
             android:numColumns="6"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_below="@id/main_grid"
+            android:layout_below="@id/grid_sudoku"
             android:visibility="invisible">
         </GridView>
 

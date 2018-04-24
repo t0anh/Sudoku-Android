@@ -49,6 +49,7 @@ public class SpannableWithImage {
 
         return hasChanges;
     }
+
     static Spannable getTextWithImages(Context context, CharSequence text, float height) {
         Spannable spannable = spannableFactory.newSpannable(text);
         addImages(context, spannable, height);
