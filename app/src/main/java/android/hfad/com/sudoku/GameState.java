@@ -6,21 +6,26 @@ public class GameState {
     private int status;
     private int difficulty;
     private int timeElapsed;
-    private int[][] solution, grid;
+    private int[][] solution = new int[9][9];
+    private int[][] grid = new int[9][9];
 
     public GameState (int status, int difficulty, int timeElapsed, int[][] solution, int[][] grid) {
         this.status = status;
         this.difficulty = difficulty;
         this.timeElapsed = timeElapsed;
-        this.solution = solution;
-        this.grid = grid;
+        for(int row = 0; row < 9; ++row) {
+            for(int col = 0; col < 9; ++col) {
+                this.solution[row][col] = solution[row][col];
+                this.grid[row][col] = grid[row][col];
+            }
+        }
     }
 
     public ContentValues getContentValues () {
         ContentValues values = new ContentValues();
         values.put("status", status);
         values.put("difficulty", difficulty);
-        values.put("timeElapsed",timeElapsed);
+        values.put("elapsedSeconds",timeElapsed);
         values.put("solutionString", getString(solution));
         values.put("gridString", getString(grid));
         return values;

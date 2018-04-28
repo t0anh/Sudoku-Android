@@ -5,9 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -16,9 +13,11 @@ import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")
 public class NumpadButton extends TextView {
-    static final String[] buttonText = {"1", "2", "3", "4", "5", "MARK",  "6", "7", "8", "9", "CLEAR", "UNDO"};
-    static final int[] number = {1, 2, 3, 4, 5, 10, 6, 7, 8, 9, 0, 11};
-    private boolean isOn;
+    final private int MARKED_COLOR = R.color.NUMPAD_BUTTON_MARKED_COLOR;
+    final private int UNMARKED_COLOR = R.color.NUMPAD_BUTTON_UNMARKED_COLOR;
+    final private String[] buttonText = {"1", "2", "3", "4", "5", "MARK",  "6", "7", "8", "9", "CLEAR", "UNDO"};
+    final private int[] index = {1, 2, 3, 4, 5, 10, 6, 7, 8, 9, 0, 11};
+
     private int position;
 
     @SuppressLint("ResourceAsColor")
@@ -28,7 +27,7 @@ public class NumpadButton extends TextView {
         setBackgroundResource(R.color.NUMPAD_BUTTON_UNMARKED_COLOR);
         setText(buttonText[position]);
         setGravity(Gravity.CENTER);
-        setTypeface(AppConverter.appFont);
+        setTypeface(AppConstant.APP_FONT);
         setHeight(Cell.CELL_HEIGHT);
 
         if(position == 10) {
@@ -49,22 +48,20 @@ public class NumpadButton extends TextView {
         }
     }
 
-    public boolean isOn() {
-        return isOn;
-    }
-    public void setState(boolean state) {
-        isOn = state;
-    }
-    public int getNumber() {
-        return number[position];
+    public int getIndex() {
+        return index[position];
     }
 
     @Override
     public boolean onTouchEvent (MotionEvent motionEvent) {
         if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            int number = getNumber();
+            int number = getIndex();
             GameActivity.onPressNumpad(number);
         }
         return true;
+    }
+
+    public void setBackgroundColor(boolean marked) {
+        setBackgroundResource(marked ? MARKED_COLOR : UNMARKED_COLOR);
     }
 }

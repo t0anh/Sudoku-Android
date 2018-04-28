@@ -10,16 +10,17 @@ import android.widget.Toast;
 
 public class LadderboardCell extends AppCompatTextView {
 
-    public LadderboardCell(final Context context, final String text, int width, Typeface font) {
+    public LadderboardCell(final Context context, final String text, int width) {
         super(context);
         setText(text);
         setTextColor(Color.WHITE);
-        int padding = (int) AppConverter.convertDpToPixel(3, context);
+        int padding = (int) AppConstant.convertDpToPixel(3, context);
         setPadding(0, padding, 0, padding);
         setGravity(Gravity.CENTER);
         setMaxLines(1);
         setWidth(width);
-        setTypeface(font);
+        setTypeface(AppConstant.APP_FONT);
+        
         if(text.length() > 0) {
             setOnClickListener(new OnClickListener() {
                 @Override

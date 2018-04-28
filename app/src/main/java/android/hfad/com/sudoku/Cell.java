@@ -3,11 +3,9 @@ package android.hfad.com.sudoku;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +48,7 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
         markedColor = R.color.MARKED_CELL_COLOR;
         setHeight(CELL_HEIGHT);
         setGravity(Gravity.CENTER);
-        setTypeface(AppConverter.appFont);
+        setTypeface(AppConstant.APP_FONT);
         setBackgroundResource(defaultColor);
 
         if (highlightColor == R.color.HIGHLIGHT_LOCKED_CELL_COLOR) {
@@ -65,7 +63,7 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     CellState getState() {
         CellState state = new CellState();
         state.mask = mask;
-        state.cellIndex = index;
+        state.index = index;
         return state;
     }
 
@@ -140,12 +138,12 @@ public class Cell extends android.support.v7.widget.AppCompatTextView {
     public boolean onTouchEvent(MotionEvent event) {
         GameActivity.highlightNeighborCells(index);
         if (isLocked) {
-            GameActivity.numpad.setVisibility(View.INVISIBLE);
+            GameActivity.setNumpadVisible(View.INVISIBLE);
         } else {
             setBackgroundResource(isMarked ? R.color.MARKED_CELL_COLOR : R.color.TARGET_CELL_COLOR);
-            GameActivity.numpad.setVisibility(View.VISIBLE);
+            GameActivity.setNumpadVisible(View.VISIBLE);
         }
-        GameActivity.selectedCell = this;
+        GameActivity.setSelectedCell(index);
         GameActivity.updateNumpad();
         return true;
     }

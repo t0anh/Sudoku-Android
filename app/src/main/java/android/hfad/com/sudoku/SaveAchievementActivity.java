@@ -21,9 +21,8 @@ public class SaveAchievementActivity extends AppCompatActivity {
     private TextView txtDifficulty, txtTimeElapsed;
     private EditText edtNickname, edtNote;
     private Button btnOK, btnCancel;
-    private int secondsElapsed;
+    private int elapsedSeconds;
     private int difficulty;
-    String difficultName, timeElapsed;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,34 +34,30 @@ public class SaveAchievementActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        timeElapsed = intent.getStringExtra("timeElapsed");
-        secondsElapsed = intent.getIntExtra("secondsElapsed", -1);
+        elapsedSeconds = intent.getIntExtra("elapsedSeconds", 9999);
         difficulty = intent.getIntExtra("difficulty", 0);
-        difficultName = GameActivity.difficultName[difficulty];
-
-        Typeface appFont = Typeface.createFromAsset(getAssets(), getString(R.string.app_font));
 
         txtDifficulty = findViewById(R.id.txtDifficulty);
-        txtDifficulty.setText(String.format("%-15s %s", "Độ khó:", difficultName));
-        txtDifficulty.setTypeface(appFont);
+        txtDifficulty.setText(String.format("%-15s %s", "Độ khó:", GameActivity.DIFFICULT_NAME[difficulty]));
+        txtDifficulty.setTypeface(AppConstant.APP_FONT);
 
         txtTimeElapsed = findViewById(R.id.txtTimeElapsed);
-        txtTimeElapsed.setText(String.format("%-15s %s", "Thời gian:", timeElapsed));
-        txtTimeElapsed.setTypeface(appFont);
+        txtTimeElapsed.setText(String.format("%-15s %s", "Thời gian:", Timer.getTimeFormat(elapsedSeconds)));
+        txtTimeElapsed.setTypeface(AppConstant.APP_FONT);
 
         edtNickname = findViewById(R.id.edtNickname);
-        edtNickname.setTypeface(appFont);
+        edtNickname.setTypeface(AppConstant.APP_FONT);
 
         edtNote = findViewById(R.id.edtNote);
-        edtNote.setTypeface(appFont);
+        edtNote.setTypeface(AppConstant.APP_FONT);
 
         btnOK = findViewById(R.id.btnOK);
         btnOK.setText("Đồng ý");
-        btnOK.setTypeface(appFont);
+        btnOK.setTypeface(AppConstant.APP_FONT);
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setText("Hủy bỏ");
-        btnCancel.setTypeface(appFont);
+        btnCancel.setTypeface(AppConstant.APP_FONT);
     }
 
     public void onClickCancel(View view) {
@@ -79,11 +74,11 @@ public class SaveAchievementActivity extends AppCompatActivity {
                 // insert into achievement table
                 SimpleDateFormat formatFactory = new SimpleDateFormat("dd/MM/yyyy");
                 ContentValues values = new ContentValues();
-                values.put("_nickname", nickname);
+                values.put("nickname", nickname);
                 values.put("difficulty", difficulty);
                 values.put("date", formatFactory.format(Calendar.getInstance().getTime()));
                 values.put("note", String.valueOf(edtNote.getText()));
-                values.put("timeElapsed", secondsElapsed);
+                values.put("elapsedSeconds", elapsedSeconds);
 
                 database.insert("achievement", null, values);
 

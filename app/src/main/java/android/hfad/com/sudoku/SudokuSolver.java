@@ -10,18 +10,18 @@ public class SudokuSolver {
     private int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     private Random rnd = new Random();
     private int[][] grid;
-    private boolean[][] rowSet, colSet, boxSet;
+    private boolean[][] rows, cols, boxes;
     private boolean genFlag;
 
     public SudokuSolver() {
         grid = new int[9][9];
-        rowSet = new boolean[9][10];
-        colSet = new boolean[9][10];
-        boxSet = new boolean[9][10];
+        rows = new boolean[9][10];
+        cols = new boolean[9][10];
+        boxes = new boolean[9][10];
         randomValuesArray(10);
     }
 
-    void clearGrid() {
+    private void clearGrid() {
         for (int r = 0; r < 9; ++r) {
             for (int c = 0; c < 9; ++c) {
                 grid[r][c] = 0;
@@ -29,14 +29,14 @@ public class SudokuSolver {
         }
         for (int i = 0; i < 9; ++i) {
             for (int v = 1; v <= 9; ++v) {
-                rowSet[i][v] = false;
-                colSet[i][v] = false;
-                boxSet[i][v] = false;
+                rows[i][v] = false;
+                cols[i][v] = false;
+                boxes[i][v] = false;
             }
         }
     }
 
-    void randomValuesArray(int numberOfTurns) {
+    private void randomValuesArray(int numberOfTurns) {
         for (int turn = 0; turn < numberOfTurns; ++turn) {
             int randomIndex = 1 + rnd.nextInt(8);
 
@@ -46,7 +46,7 @@ public class SudokuSolver {
         }
     }
 
-    void generate(int pos) {
+    private void generate(int pos) {
         if (pos == 81) {
             genFlag = false;
         } else if (genFlag) {
@@ -55,21 +55,21 @@ public class SudokuSolver {
             int box = (row / 3) * 3 + col / 3;
             randomValuesArray(5);
             for (int val : values) {
-                if (genFlag && rowSet[row][val] == false && colSet[col][val] == false && boxSet[box][val] == false) {
+                if (genFlag && rows[row][val] == false && cols[col][val] == false && boxes[box][val] == false) {
                     grid[row][col] = val;
-                    rowSet[row][val] = true;
-                    colSet[col][val] = true;
-                    boxSet[box][val] = true;
+                    rows[row][val] = true;
+                    cols[col][val] = true;
+                    boxes[box][val] = true;
                     generate(pos + 1);
-                    rowSet[row][val] = false;
-                    colSet[col][val] = false;
-                    boxSet[box][val] = false;
+                    rows[row][val] = false;
+                    cols[col][val] = false;
+                    boxes[box][val] = false;
                 }
             }
         }
     }
 
-    int[][] getRandomGrid(int numberOfEmptyCells) {
+    public int[][] getRandomGrid(int numberOfEmptyCells) {
         clearGrid();
         genFlag = true;
         generate(0);

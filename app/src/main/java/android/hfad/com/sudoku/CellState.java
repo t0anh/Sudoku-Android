@@ -5,5 +5,5 @@ package android.hfad.com.sudoku;
  */
 
 public class CellState {
-    int mask, cellIndex;
+    int mask, index;
 }

@@ -20,8 +20,8 @@ public class MainMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppConstant.init(this);
 
-        AppConverter.init(this);
         Typeface appFont = Typeface.createFromAsset(getAssets(), getString(R.string.app_font));
         /* hide the status bar */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -41,8 +41,8 @@ public class MainMenuActivity extends Activity {
         super.onStart();
         DatabaseHelper DBHelper = DatabaseHelper.newInstance(this);
         SQLiteDatabase database = DBHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM GameState ORDER BY createdDate DESC LIMIT 1", null);
-        float dp = AppConverter.convertDpToPixel(1, this);
+        Cursor cursor = database.rawQuery("SELECT * FROM GameState ORDER BY lastPlaying DESC LIMIT 1", null);
+        float dp = AppConstant.convertDpToPixel(1, this);
         int btnWidth = (int) (170 * dp);
         int btnMargin = (int) (5 * dp);
         if(cursor != null && cursor.getCount() > 0) {
@@ -81,30 +81,29 @@ public class MainMenuActivity extends Activity {
 
     public void onClickResume(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        String id, status, difficulty, timeElapsed, solutionString, gridString;
+        String status, difficulty, elapsedSeconds, solutionString, gridString;
         Cursor cursor;
         try {
             DatabaseHelper DBHelper = DatabaseHelper.newInstance(this);
             SQLiteDatabase database = DBHelper.getWritableDatabase();
-            cursor = database.rawQuery("SELECT * FROM GameState ORDER BY createdDate DESC LIMIT 1", null);
+            cursor = database.rawQuery("SELECT * FROM GameState ORDER BY lastPlaying DESC LIMIT 1", null);
             if(cursor.getCount() > 0) {
                 cursor.moveToFirst();
 
                 status = cursor.getString(cursor.getColumnIndex("status"));
                 difficulty = cursor.getString(cursor.getColumnIndex("difficulty"));
-                timeElapsed = cursor.getString(cursor.getColumnIndex("timeElapsed"));
+                elapsedSeconds = cursor.getString(cursor.getColumnIndex("elapsedSeconds"));
                 solutionString = cursor.getString(cursor.getColumnIndex("solutionString"));
                 gridString = cursor.getString(cursor.getColumnIndex("gridString"));
-                id = cursor.getString(cursor.getColumnIndex("id"));
-
-                // remove old data
-                database.execSQL("DELETE FROM GameState WHERE 1");
 
                 intent.putExtra("status", Integer.parseInt(status));
                 intent.putExtra("difficulty", Integer.parseInt(difficulty));
-                intent.putExtra("timeElapsed", Integer.parseInt(timeElapsed));
+                intent.putExtra("elapsedSeconds", Integer.parseInt(elapsedSeconds));
                 intent.putExtra("solutionString", solutionString);
                 intent.putExtra("gridString", gridString);
+
+                // remove old data
+                database.execSQL("DELETE FROM GameState WHERE 1");
 
                 startActivity(intent);
             }

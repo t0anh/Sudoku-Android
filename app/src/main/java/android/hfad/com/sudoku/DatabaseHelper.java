@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
-    public static DatabaseHelper newInstance (Context context) {
+        public static DatabaseHelper newInstance (Context context) {
         if(databaseInstance == null) {
             databaseInstance = new DatabaseHelper(context.getApplicationContext());
         }
@@ -34,8 +34,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
-            sqLiteDatabase.execSQL("CREATE TABLE Achievement (_id INTEGER PRIMARY KEY AUTOINCREMENT, _nickname TEXT, timeElapsed INTEGER, difficulty TEXT, date TEXT, note TEXT)");
-            sqLiteDatabase.execSQL("CREATE TABLE GameState (id INTEGER PRIMARY KEY AUTOINCREMENT, difficulty int, status INTEGER, timeElapsed INTEGER, solutionString TEXT, gridString TEXT, createdDate DateTime DEFAULT (DateTime('now', 'localtime')))");
+            sqLiteDatabase.execSQL("CREATE TABLE Achievement (_id INTEGER PRIMARY KEY AUTOINCREMENT, nickname TEXT, elapsedSeconds INTEGER, difficulty TEXT, date TEXT, note TEXT)");
+            sqLiteDatabase.execSQL("CREATE TABLE GameState (id INTEGER PRIMARY KEY AUTOINCREMENT, difficulty INTEGER, status INTEGER, elapsedSeconds INTEGER, solutionString TEXT, gridString TEXT, lastPlaying DateTime DEFAULT (DateTime('now', 'localtime')))");
         }
         catch (SQLException e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
